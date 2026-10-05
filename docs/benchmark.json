@@ -1,0 +1,1361 @@
+{
+  "runAt": "2026-10-05T04:33:19.618Z",
+  "backend": "local-pglite",
+  "model": "Xenova/multilingual-e5-small",
+  "dtype": "q8",
+  "dimensions": 384,
+  "corpus": "Six disclosed synthetic household receipts in server/samples.js",
+  "method": "Top-1 correctness on 14 positive queries; empty results required on four no-match queries. Same corpus and embeddings for all modes. RRF k=60, exact identifier restriction. Local process; caches can affect timing.",
+  "tuning": "Semantic cutoff/gap tuned only on the four development queries in development-probe.js before this run. Benchmark is a small builder-authored test, not a general quality claim.",
+  "thresholds": {
+    "minimum": 0.78,
+    "gap": 0.02,
+    "strong": 0.84,
+    "relativeWindow": 0.035
+  },
+  "outcomes": [
+    {
+      "query": "washing machine bill",
+      "language": "English",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000001",
+      "expectedTitle": "Washing machine",
+      "actualId": "10000000-0000-4000-8000-000000000001",
+      "actualTitle": "Washing machine",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 7,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.013051316142082214,
+          "keywordRank": 1,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "washing machine bill",
+      "language": "English",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000001",
+      "expectedTitle": "Washing machine",
+      "actualId": "10000000-0000-4000-8000-000000000001",
+      "actualTitle": "Washing machine",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 545,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.8586263316460354,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "washing machine bill",
+      "language": "English",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000001",
+      "expectedTitle": "Washing machine",
+      "actualId": "10000000-0000-4000-8000-000000000001",
+      "actualTitle": "Washing machine",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.8586263316460354,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "water purifier filter replacement",
+      "language": "English",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000002",
+      "expectedTitle": "Water purifier service",
+      "actualId": "10000000-0000-4000-8000-000000000002",
+      "actualTitle": "Water purifier service",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.016477835313806866,
+          "keywordRank": 1,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "water purifier filter replacement",
+      "language": "English",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000002",
+      "expectedTitle": "Water purifier service",
+      "actualId": "10000000-0000-4000-8000-000000000002",
+      "actualTitle": "Water purifier service",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 8,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.8899014925722435,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "water purifier filter replacement",
+      "language": "English",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000002",
+      "expectedTitle": "Water purifier service",
+      "actualId": "10000000-0000-4000-8000-000000000002",
+      "actualTitle": "Water purifier service",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.8899014925722435,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "three jar grinder",
+      "language": "English",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000003",
+      "expectedTitle": "Mixer grinder",
+      "actualId": "10000000-0000-4000-8000-000000000003",
+      "actualTitle": "Mixer grinder",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": -0.022531398160374305,
+          "keywordRank": 1,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "three jar grinder",
+      "language": "English",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000003",
+      "expectedTitle": "Mixer grinder",
+      "actualId": "10000000-0000-4000-8000-000000000003",
+      "actualTitle": "Mixer grinder",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 7,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8535248041153015,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "three jar grinder",
+      "language": "English",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000003",
+      "expectedTitle": "Mixer grinder",
+      "actualId": "10000000-0000-4000-8000-000000000003",
+      "actualTitle": "Mixer grinder",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8535248041153015,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "fridge purchase",
+      "language": "English",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000004",
+      "expectedTitle": "Refrigerator",
+      "actualId": "10000000-0000-4000-8000-000000000001",
+      "actualTitle": "Washing machine",
+      "correct": false,
+      "rank": 3,
+      "resultCount": 6,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.013051316142082214,
+          "keywordRank": 1,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": -0.022531398160374305,
+          "keywordRank": 2,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.01895532294442126,
+          "keywordRank": 3,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": -0.005678155163024501,
+          "keywordRank": 4,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.042908951417992,
+          "keywordRank": 5,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.016477835313806866,
+          "keywordRank": 6,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "fridge purchase",
+      "language": "English",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000004",
+      "expectedTitle": "Refrigerator",
+      "actualId": "10000000-0000-4000-8000-000000000004",
+      "actualTitle": "Refrigerator",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 6,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.8836690700161393,
+          "keywordRank": 3,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "fridge purchase",
+      "language": "English",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000004",
+      "expectedTitle": "Refrigerator",
+      "actualId": "10000000-0000-4000-8000-000000000004",
+      "actualTitle": "Refrigerator",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 6,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.8836690700161393,
+          "keywordRank": 3,
+          "vectorRank": 1
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.8464320623455295,
+          "keywordRank": 1,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8271267804058764,
+          "keywordRank": 2,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": 0.8441693755741698,
+          "keywordRank": 4,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.8410699367523731,
+          "keywordRank": 5,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.8041215305473474,
+          "keywordRank": 6,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "fan invoice",
+      "language": "English",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000005",
+      "expectedTitle": "Ceiling fan",
+      "actualId": "10000000-0000-4000-8000-000000000005",
+      "actualTitle": "Ceiling fan",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 5,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": -0.005678155163024501,
+          "keywordRank": 1,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": -0.022531398160374305,
+          "keywordRank": 2,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.013051316142082214,
+          "keywordRank": 3,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.01895532294442126,
+          "keywordRank": 4,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.042908951417992,
+          "keywordRank": 5,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "fan invoice",
+      "language": "English",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000005",
+      "expectedTitle": "Ceiling fan",
+      "actualId": "10000000-0000-4000-8000-000000000005",
+      "actualTitle": "Ceiling fan",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 2,
+      "elapsedMs": 6,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": 0.8623145479653644,
+          "keywordRank": 1,
+          "vectorRank": 1
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.8301119804382324,
+          "keywordRank": 3,
+          "vectorRank": 2
+        }
+      ]
+    },
+    {
+      "query": "fan invoice",
+      "language": "English",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000005",
+      "expectedTitle": "Ceiling fan",
+      "actualId": "10000000-0000-4000-8000-000000000005",
+      "actualTitle": "Ceiling fan",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 5,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": 0.8623145479653644,
+          "keywordRank": 1,
+          "vectorRank": 1
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.8301119804382324,
+          "keywordRank": 3,
+          "vectorRank": 2
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8001588106060751,
+          "keywordRank": 2,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.8168939377209542,
+          "keywordRank": 4,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.8119906523244537,
+          "keywordRank": 5,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "microwave oven receipt",
+      "language": "English",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000006",
+      "expectedTitle": "Microwave",
+      "actualId": "10000000-0000-4000-8000-000000000006",
+      "actualTitle": "Microwave",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 6,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.042908951417992,
+          "keywordRank": 1,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.016477835313806866,
+          "keywordRank": 2,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.013051316142082214,
+          "keywordRank": 3,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": -0.022531398160374305,
+          "keywordRank": 4,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.01895532294442126,
+          "keywordRank": 5,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": -0.005678155163024501,
+          "keywordRank": 6,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "microwave oven receipt",
+      "language": "English",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000006",
+      "expectedTitle": "Microwave",
+      "actualId": "10000000-0000-4000-8000-000000000006",
+      "actualTitle": "Microwave",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 10,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.8818221425467565,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "microwave oven receipt",
+      "language": "English",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000006",
+      "expectedTitle": "Microwave",
+      "actualId": "10000000-0000-4000-8000-000000000006",
+      "actualTitle": "Microwave",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 6,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.8818221425467565,
+          "keywordRank": 1,
+          "vectorRank": 1
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.8251988433479408,
+          "keywordRank": 2,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.8170399691224143,
+          "keywordRank": 3,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8315771965602695,
+          "keywordRank": 4,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.8225304551513359,
+          "keywordRank": 5,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": 0.8194072519673021,
+          "keywordRank": 6,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "कपड़े साफ करने की मशीन का बिल",
+      "language": "Hindi",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000001",
+      "expectedTitle": "Washing machine",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": false,
+      "rank": 0,
+      "resultCount": 0,
+      "elapsedMs": 2,
+      "results": []
+    },
+    {
+      "query": "कपड़े साफ करने की मशीन का बिल",
+      "language": "Hindi",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000001",
+      "expectedTitle": "Washing machine",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": false,
+      "rank": 0,
+      "resultCount": 0,
+      "elapsedMs": 7,
+      "results": []
+    },
+    {
+      "query": "कपड़े साफ करने की मशीन का बिल",
+      "language": "Hindi",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000001",
+      "expectedTitle": "Washing machine",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": false,
+      "rank": 0,
+      "resultCount": 0,
+      "elapsedMs": 3,
+      "results": []
+    },
+    {
+      "query": "पानी के फिल्टर की सर्विस",
+      "language": "Hindi",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000002",
+      "expectedTitle": "Water purifier service",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": false,
+      "rank": 0,
+      "resultCount": 0,
+      "elapsedMs": 2,
+      "results": []
+    },
+    {
+      "query": "पानी के फिल्टर की सर्विस",
+      "language": "Hindi",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000002",
+      "expectedTitle": "Water purifier service",
+      "actualId": "10000000-0000-4000-8000-000000000002",
+      "actualTitle": "Water purifier service",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 6,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.8395756578698377,
+          "keywordRank": null,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "पानी के फिल्टर की सर्विस",
+      "language": "Hindi",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000002",
+      "expectedTitle": "Water purifier service",
+      "actualId": "10000000-0000-4000-8000-000000000002",
+      "actualTitle": "Water purifier service",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.8395756578698377,
+          "keywordRank": null,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "मिक्सर ग्राइंडर की रसीद",
+      "language": "Hindi",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000003",
+      "expectedTitle": "Mixer grinder",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": false,
+      "rank": 0,
+      "resultCount": 0,
+      "elapsedMs": 2,
+      "results": []
+    },
+    {
+      "query": "मिक्सर ग्राइंडर की रसीद",
+      "language": "Hindi",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000003",
+      "expectedTitle": "Mixer grinder",
+      "actualId": "10000000-0000-4000-8000-000000000003",
+      "actualTitle": "Mixer grinder",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 8,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8037082190861441,
+          "keywordRank": null,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "मिक्सर ग्राइंडर की रसीद",
+      "language": "Hindi",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000003",
+      "expectedTitle": "Mixer grinder",
+      "actualId": "10000000-0000-4000-8000-000000000003",
+      "actualTitle": "Mixer grinder",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8037082190861441,
+          "keywordRank": null,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "fridge ka bill",
+      "language": "Hinglish",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000004",
+      "expectedTitle": "Refrigerator",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": false,
+      "rank": 0,
+      "resultCount": 0,
+      "elapsedMs": 2,
+      "results": []
+    },
+    {
+      "query": "fridge ka bill",
+      "language": "Hinglish",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000004",
+      "expectedTitle": "Refrigerator",
+      "actualId": "10000000-0000-4000-8000-000000000004",
+      "actualTitle": "Refrigerator",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 4,
+      "elapsedMs": 6,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.8326324769385889,
+          "keywordRank": null,
+          "vectorRank": 1
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.803096675503673,
+          "keywordRank": null,
+          "vectorRank": 2
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.7989129304237934,
+          "keywordRank": null,
+          "vectorRank": 3
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.798301279544836,
+          "keywordRank": null,
+          "vectorRank": 4
+        }
+      ]
+    },
+    {
+      "query": "fridge ka bill",
+      "language": "Hinglish",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000004",
+      "expectedTitle": "Refrigerator",
+      "actualId": "10000000-0000-4000-8000-000000000004",
+      "actualTitle": "Refrigerator",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 4,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.8326324769385889,
+          "keywordRank": null,
+          "vectorRank": 1
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.803096675503673,
+          "keywordRank": null,
+          "vectorRank": 2
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.7989129304237934,
+          "keywordRank": null,
+          "vectorRank": 3
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.798301279544836,
+          "keywordRank": null,
+          "vectorRank": 4
+        }
+      ]
+    },
+    {
+      "query": "pankha kharidne ki receipt",
+      "language": "Hinglish",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000005",
+      "expectedTitle": "Ceiling fan",
+      "actualId": "10000000-0000-4000-8000-000000000002",
+      "actualTitle": "Water purifier service",
+      "correct": false,
+      "rank": 5,
+      "resultCount": 6,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.016477835313806866,
+          "keywordRank": 1,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.013051316142082214,
+          "keywordRank": 2,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": -0.022531398160374305,
+          "keywordRank": 3,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.01895532294442126,
+          "keywordRank": 4,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": -0.005678155163024501,
+          "keywordRank": 5,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.042908951417992,
+          "keywordRank": 6,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "pankha kharidne ki receipt",
+      "language": "Hinglish",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000005",
+      "expectedTitle": "Ceiling fan",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": false,
+      "rank": 0,
+      "resultCount": 0,
+      "elapsedMs": 7,
+      "results": []
+    },
+    {
+      "query": "pankha kharidne ki receipt",
+      "language": "Hinglish",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000005",
+      "expectedTitle": "Ceiling fan",
+      "actualId": "10000000-0000-4000-8000-000000000002",
+      "actualTitle": "Water purifier service",
+      "correct": false,
+      "rank": 5,
+      "resultCount": 6,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000002",
+          "title": "Water purifier service",
+          "similarity": 0.819615954275158,
+          "keywordRank": 1,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000001",
+          "title": "Washing machine",
+          "similarity": 0.7944674385863915,
+          "keywordRank": 2,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8056341392892313,
+          "keywordRank": 3,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000004",
+          "title": "Refrigerator",
+          "similarity": 0.8124559391329953,
+          "keywordRank": 4,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": 0.7942465674959119,
+          "keywordRank": 5,
+          "vectorRank": null
+        },
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.7985534912422648,
+          "keywordRank": 6,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "khana garam karne wala oven",
+      "language": "Hinglish",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000006",
+      "expectedTitle": "Microwave",
+      "actualId": "10000000-0000-4000-8000-000000000006",
+      "actualTitle": "Microwave",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.042908951417992,
+          "keywordRank": 1,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "khana garam karne wala oven",
+      "language": "Hinglish",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000006",
+      "expectedTitle": "Microwave",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": false,
+      "rank": 0,
+      "resultCount": 0,
+      "elapsedMs": 6,
+      "results": []
+    },
+    {
+      "query": "khana garam karne wala oven",
+      "language": "Hinglish",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000006",
+      "expectedTitle": "Microwave",
+      "actualId": "10000000-0000-4000-8000-000000000006",
+      "actualTitle": "Microwave",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000006",
+          "title": "Microwave",
+          "similarity": 0.8167621930212572,
+          "keywordRank": 1,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "KW-MX-803",
+      "language": "Identifier",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000003",
+      "expectedTitle": "Mixer grinder",
+      "actualId": "10000000-0000-4000-8000-000000000003",
+      "actualTitle": "Mixer grinder",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": -0.022531398160374305,
+          "keywordRank": 1,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "KW-MX-803",
+      "language": "Identifier",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000003",
+      "expectedTitle": "Mixer grinder",
+      "actualId": "10000000-0000-4000-8000-000000000003",
+      "actualTitle": "Mixer grinder",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 5,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8350792180025437,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "KW-MX-803",
+      "language": "Identifier",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000003",
+      "expectedTitle": "Mixer grinder",
+      "actualId": "10000000-0000-4000-8000-000000000003",
+      "actualTitle": "Mixer grinder",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 3,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000003",
+          "title": "Mixer grinder",
+          "similarity": 0.8350792180025437,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "BH-FAN-628",
+      "language": "Identifier",
+      "mode": "keyword",
+      "expectedId": "10000000-0000-4000-8000-000000000005",
+      "expectedTitle": "Ceiling fan",
+      "actualId": "10000000-0000-4000-8000-000000000005",
+      "actualTitle": "Ceiling fan",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": -0.005678155163024501,
+          "keywordRank": 1,
+          "vectorRank": null
+        }
+      ]
+    },
+    {
+      "query": "BH-FAN-628",
+      "language": "Identifier",
+      "mode": "vector",
+      "expectedId": "10000000-0000-4000-8000-000000000005",
+      "expectedTitle": "Ceiling fan",
+      "actualId": "10000000-0000-4000-8000-000000000005",
+      "actualTitle": "Ceiling fan",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 5,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": 0.8508039459346582,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "BH-FAN-628",
+      "language": "Identifier",
+      "mode": "hybrid",
+      "expectedId": "10000000-0000-4000-8000-000000000005",
+      "expectedTitle": "Ceiling fan",
+      "actualId": "10000000-0000-4000-8000-000000000005",
+      "actualTitle": "Ceiling fan",
+      "correct": true,
+      "rank": 1,
+      "resultCount": 1,
+      "elapsedMs": 2,
+      "results": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "title": "Ceiling fan",
+          "similarity": 0.8508039459346582,
+          "keywordRank": 1,
+          "vectorRank": 1
+        }
+      ]
+    },
+    {
+      "query": "airline boarding pass",
+      "language": "No match",
+      "mode": "keyword",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 1,
+      "results": []
+    },
+    {
+      "query": "airline boarding pass",
+      "language": "No match",
+      "mode": "vector",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 5,
+      "results": []
+    },
+    {
+      "query": "airline boarding pass",
+      "language": "No match",
+      "mode": "hybrid",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 2,
+      "results": []
+    },
+    {
+      "query": "income tax filing acknowledgement",
+      "language": "No match",
+      "mode": "keyword",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 1,
+      "results": []
+    },
+    {
+      "query": "income tax filing acknowledgement",
+      "language": "No match",
+      "mode": "vector",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 6,
+      "results": []
+    },
+    {
+      "query": "income tax filing acknowledgement",
+      "language": "No match",
+      "mode": "hybrid",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 3,
+      "results": []
+    },
+    {
+      "query": "pet vaccination certificate",
+      "language": "No match",
+      "mode": "keyword",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 1,
+      "results": []
+    },
+    {
+      "query": "pet vaccination certificate",
+      "language": "No match",
+      "mode": "vector",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 5,
+      "results": []
+    },
+    {
+      "query": "pet vaccination certificate",
+      "language": "No match",
+      "mode": "hybrid",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 3,
+      "results": []
+    },
+    {
+      "query": "ZZ-UNKNOWN-404",
+      "language": "No match",
+      "mode": "keyword",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 1,
+      "results": []
+    },
+    {
+      "query": "ZZ-UNKNOWN-404",
+      "language": "No match",
+      "mode": "vector",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 6,
+      "results": []
+    },
+    {
+      "query": "ZZ-UNKNOWN-404",
+      "language": "No match",
+      "mode": "hybrid",
+      "expectedId": null,
+      "expectedTitle": "No match",
+      "actualId": null,
+      "actualTitle": "No match",
+      "correct": true,
+      "rank": null,
+      "resultCount": 0,
+      "elapsedMs": 3,
+      "results": []
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+const queries=['कपड़े धोने वाली मशीन','paani saaf karne wale ka filter','passport renewal appointment','school admission fee','washing machine warranty','ro service','मसाला पीसने वाला मिक्सर','HA-2026-0914'];
+for(const q of queries){const r=await fetch('http://127.0.0.1:4318/api/search?'+new URLSearchParams({q}));const d=await r.json();console.log(JSON.stringify({q,error:d.error,results:d.results?.map(x=>({title:x.title,sim:x.similarity,lex:x.lexicalScore})),ms:d.elapsedMs}));}

@@ -1,0 +1,30 @@
+{
+  "name": "maa-ka-drawer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"node --env-file-if-exists=.env server/index.js\" \"vite --host 127.0.0.1\"",
+    "build": "vite build",
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "test": "node --test --test-concurrency=1 tests/*.test.js",
+    "benchmark": "node --env-file-if-exists=.env scripts/benchmark.js",
+    "warm-model": "node scripts/warm-model.js"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.3.14",
+    "@huggingface/transformers": "^3.8.1",
+    "express": "^5.1.0",
+    "lucide-react": "^0.468.0",
+    "pdfjs-dist": "^4.10.38",
+    "pg": "^8.16.3",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "concurrently": "^9.2.1",
+    "vite": "^6.1.0"
+  }
+}
