@@ -1,39 +1,37 @@
-# Demo transcript
+WEBVTT
 
-Narrated by Murf Isha, English (India), Conversational style. This walkthrough is assembled from real browser screenshots captured during actual app interactions; it is not a continuous screen recording. Receipts are fictional. Each scene is timed to its narration.
-
-## 01. A little less searching.
-
+1
+00:00:00.350 --> 00:00:12.167
 Meet Maa ka Drawer, a household receipt finder built for my mother. These are real captures of the working app, using fictional bills. Choose a card to open its receipt.
 
-## 02. Search in everyday words.
-
+2
+00:00:13.017 --> 00:00:26.208
 You can search in everyday language. Here, a Hindi phrase for washing machine finds an English receipt. An open multilingual model combines meaning based search with keyword matches.
 
-## 03. Keep the proof visible.
-
+3
+00:00:27.058 --> 00:00:37.958
 Open the matching card to see the saved bill, invoice number, amount, and dates. The app shows the receipt text, so you can check the details yourself.
 
-## 04. Sometimes, no match.
-
+4
+00:00:38.808 --> 00:00:50.750
 When nothing relevant is saved, the app says no clear match. This passport query finds no receipt. Search still has limitations, which are documented with the code.
 
-## 05. Save it once.
-
+5
+00:00:51.600 --> 00:01:04.083
 To save a new bill, add a title and paste the receipt text. Attach a PDF or photo, check the details, then save. This version does not extract text automatically.
 
-## 06. The original, right there.
-
+6
+00:01:04.933 --> 00:01:16.292
 The original PDF is now available inside the receipt. You can view it or download it. If the bill does not state a warranty expiry date, that field stays blank.
 
-## 07. Tidy up, with an undo.
-
+7
+00:01:17.142 --> 00:01:27.917
 Want to tidy the drawer? Archive removes a receipt from the active view while keeping its saved text and original. The Undo button lets you bring it straight back.
 
-## 08. Still here after a reload.
-
+8
+00:01:28.767 --> 00:01:42.042
 After Undo, the receipt returns and stays saved when the page reloads. This walkthrough uses the local database. Twelve integration tests cover the main storage and retrieval flows.
 
-## 09. Open AI. Honest limits.
-
+9
+00:01:42.892 --> 00:02:01.917
 On six fictional bills, hybrid search found twelve of fourteen expected matches. Two language queries failed. Tiger Cloud storage, vector search, and persistence are now verified separately. A trial with my mother is still pending. The code and results are public.

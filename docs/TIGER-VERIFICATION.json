@@ -1,0 +1,19 @@
+{
+  "verifiedAt": "2026-10-05T05:45:47.892Z",
+  "backend": "tiger-cloud",
+  "data": "Synthetic verification receipt only",
+  "checks": {
+    "tls": true,
+    "pgvectorVersion": "0.8.6",
+    "saved": true,
+    "exactInvoice": true,
+    "stored384DimensionalVectors": true,
+    "vectorSearch": true,
+    "reconnectPersistence": true,
+    "archivedExcluded": true,
+    "undo": true
+  },
+  "verificationRecordId": "34f5196c-c30a-400d-b41f-6f6ad972bd04",
+  "finalRecordState": "archived",
+  "note": "This verifies the database integration. It is not a cloud performance benchmark or a test with the beneficiary."
+}

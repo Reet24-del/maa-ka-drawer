@@ -2,7 +2,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { vector } from '@electric-sql/pglite/vector';
 import pg from 'pg';
 import path from 'node:path';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
 import { DATA_DIR } from './config.js';
 
 export async function openDatabase({ directory = path.join(DATA_DIR, 'postgres'), url = process.env.DATABASE_URL } = {}) {
@@ -13,7 +13,8 @@ export async function openDatabase({ directory = path.join(DATA_DIR, 'postgres')
     if (!['postgres:', 'postgresql:'].includes(parsed.protocol)) throw new Error('DATABASE_URL must be PostgreSQL');
     const isLocal = ['127.0.0.1', 'localhost', '::1'].includes(parsed.hostname);
     parsed.searchParams.delete('sslmode');
-    const pool = new pg.Pool({ connectionString: parsed.toString(), ssl: isLocal ? false : { rejectUnauthorized: true }, max: 4, connectionTimeoutMillis: 12000 });
+    const ca = process.env.DATABASE_SSL_CA ? await readFile(process.env.DATABASE_SSL_CA, 'utf8') : undefined;
+    const pool = new pg.Pool({ connectionString: parsed.toString(), ssl: isLocal ? false : { rejectUnauthorized: true, ...(ca ? { ca } : {}) }, max: 4, connectionTimeoutMillis: 12000 });
     db = { query: (sql, params) => pool.query(sql, params), exec: sql => pool.query(sql), close: () => pool.end(), transaction: async fn => {
       const client = await pool.connect();
       try { await client.query('BEGIN'); const result = await fn(client); await client.query('COMMIT'); return result; }

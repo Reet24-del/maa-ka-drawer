@@ -13,11 +13,13 @@ export default function App() {
   const requestId=useRef(0); const searchRef=useRef(null);
   useEffect(()=>{
     let alive=true;let timer;
-    async function poll(){try{const h=await request('/api/health');if(!alive)return;setHealth(h);if(h.status==='ready')await refresh();else if(h.status!=='error')timer=setTimeout(poll,1800);}catch(e){if(alive){setError('Cannot reach the drawer. Make sure the app server is running.');timer=setTimeout(poll,5000);}}}
+    async function poll(){try{const h=await request('/api/health');if(!alive)return;if(h.status==='ready')await refresh();if(!alive)return;setHealth(h);if(h.status!=='ready'&&h.status!=='error')timer=setTimeout(poll,1800);}catch(e){if(alive){setError('Cannot reach the drawer. Make sure the app server is running.');timer=setTimeout(poll,5000);}}}
     poll();return()=>{alive=false;clearTimeout(timer);};
   },[]);
   async function refresh(preferId) {
+    const before=requestId.current;
     const data=await request('/api/receipts');setAll(data.receipts);
+    if(before!==requestId.current)return;
     await runSearch(query,category,preferId,data.receipts);
   }
   async function runSearch(text,filter=category,preferId=null,known=null) {
@@ -34,7 +36,7 @@ export default function App() {
   async function archive(receipt){setArchiving(true);setError('');try{await request(`/api/receipts/${receipt.id}/archive`,{method:'PATCH',body:JSON.stringify({archived:true})});setNotice({text:`${receipt.title} archived.`,id:receipt.id});setDetailsOpen(false);await refresh();}catch(e){setError(e.message);}finally{setArchiving(false);}}
   async function undo(){const id=notice.id;try{await request(`/api/receipts/${id}/archive`,{method:'PATCH',body:JSON.stringify({archived:false})});setNotice({text:'Receipt restored.'});await refresh(id);}catch(e){setError(e.message);}}
   function useExample(value){setDraft(value);runSearch(value);}
-  function onSaved(receipt){setQuery('');setDraft('');setCategory('All');setNotice({text:`${receipt.title} saved.`});request('/api/receipts').then(data=>{setAll(data.receipts);setResults(data.receipts);setSelected(data.receipts.find(x=>x.id===receipt.id));}).catch(e=>setError(e.message));}
+  function onSaved(receipt){setDraft('');setNotice({text:`${receipt.title} saved.`});runSearch('','All',receipt.id);}
   const ready=health?.status==='ready';
   return <>
     <header className="site-header"><a className="brand" href="/" aria-label="Maa ka Drawer home"><span className="drawer-icon" aria-hidden="true"><Archive size={35} strokeWidth={1.5}/></span>Maa ka Drawer</a><button className="primary add-button" onClick={()=>setAdding(true)} disabled={!ready}><Plus size={20}/>Add receipt</button></header>
@@ -48,7 +50,7 @@ export default function App() {
       {ready&&<>
         <p className="sample-notice gallery-notice">{all.some(r=>r.isSample)?'Sample drawer · Fictional receipts for trying things out':'Your drawer · Saved receipts and source documents'}</p>
         <div className="workspace card-workspace" aria-busy={busy}>
-          <section className="receipts" aria-label="Receipt cards"><div className="list-heading"><h2>{query?'Search results':'Your receipts'}</h2><span aria-live="polite">{query?`${results.length} found`:`${all.length} saved`}</span></div>
+          <section className="receipts" aria-label="Receipt cards"><div className="list-heading"><h2>{query?'Search results':'Your receipts'}</h2><span aria-live="polite">{busy?'Searching…':query?`${results.length} found`:`${all.length} saved`}</span></div>
             <div className="filters" role="group" aria-label="Filter receipts">{['All','Appliances','Services',...(all.some(r=>r.category==='Other')?['Other']:[])].map(value=><button className={category===value?'active':''} aria-pressed={category===value} onClick={()=>runSearch(query,value)} key={value}>{value}</button>)}</div>
             {query&&<div className="search-summary"><span>For “{query}”</span><button onClick={()=>{setDraft('');runSearch('');}}>Show all receipts</button></div>}
             <div className={`card-gallery ${busy?'pending':''}`}>

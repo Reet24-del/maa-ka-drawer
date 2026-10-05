@@ -2,13 +2,13 @@
 
 Find household bills in everyday language and keep the original document beside the result. Built for the author's mother for DEV's Hacktoberfest Weekend Challenge, with Tiger Data selected as the primary partner category.
 
-**Current status:** working local prototype. Actual open multilingual embeddings and PostgreSQL/pgvector queries are tested. The Tiger Cloud adapter is implemented, but a live Tiger Cloud connection is **not yet verified**. The local development database is PGlite; it must not be described as a Tiger Cloud service.
+**Current status:** working prototype with a verified Tiger Cloud connection. Actual 384-dimensional embeddings, pgvector retrieval, reconnect persistence, archive and undo passed against a dedicated free Tiger Cloud service on October 5, 2026. [Verification record](docs/TIGER-VERIFICATION.json). Local PGlite remains available for development.
 
 ## Demo and code
 
-[93-second captioned demo](https://github.com/Reet24-del/maa-ka-drawer/releases/download/v0.1.0/maa-ka-drawer-demo.mp4) · [Release notes](https://github.com/Reet24-del/maa-ka-drawer/releases/tag/v0.1.0) · [Demo scene notes](docs/demo/transcript.md)
+[2-minute narrated demo](https://github.com/Reet24-del/maa-ka-drawer/releases/download/v0.1.0/maa-ka-drawer-demo.mp4) · [Release notes](https://github.com/Reet24-del/maa-ka-drawer/releases/tag/v0.1.0) · [Demo scene notes](docs/demo/transcript.md)
 
-The silent video is assembled from real browser captures, not a continuous screen recording. It uses only synthetic receipts.
+The video is narrated by Murf Isha in Indian English and assembled from real browser captures, not a continuous screen recording. It uses only synthetic receipts.
 
 ![Maa ka Drawer receipt gallery](docs/demo/drawer.jpg)
 
@@ -38,9 +38,9 @@ Open http://127.0.0.1:4318. The server binds to 127.0.0.1 by default. This is a 
 2. Copy `.env.example` to `.env` and set `DATABASE_URL` locally to the service's PostgreSQL connection string. Keep it out of chat, screenshots and version control.
 3. Restart the API. It creates dedicated `documents`, `chunks`, and `app_meta` tables and enables `vector` if permitted. Use a dedicated development database/schema; the current table names are unqualified.
 4. Inspect `/api/health`: it should report `tiger-cloud`, an actual model state, and the search method. A custom Tiger hostname may appear as `postgresql`; inspect the connection destination privately rather than relabelling another provider.
-5. Run `npm run verify:tiger` against that dedicated service. It checks the Tiger hostname, TLS, pgvector, real stored 384-dimensional embeddings, exact and vector retrieval, reconnect persistence, archive and undo. It leaves only its own synthetic proof record archived and writes `docs/TIGER-VERIFICATION.json` only after every check succeeds. Do not claim Tiger Data integration before this succeeds.
+5. Run `npm run verify:tiger` against that dedicated service. It checks the Tiger hostname, TLS, pgvector, real stored 384-dimensional embeddings, exact and vector retrieval, reconnect persistence, archive and undo. It leaves only its own synthetic proof record archived and writes `docs/TIGER-VERIFICATION.json` only after every check succeeds. The checked-in verification record documents the successful live run.
 
-TLS certificate verification is enabled for remote databases. A configured connection failure does not silently fall back to local storage. Cloud text and vectors are stored remotely; originals currently remain in the app's local `.data/uploads` directory. Model inference stays on the app server. Do not claim a cloud configuration is completely offline or that no data leaves the computer.
+TLS certificate verification is enabled for remote databases. `DATABASE_SSL_CA` optionally names a private CA PEM file; hostname validation remains enabled. The free service used here presents a Timescale private CA. Its certificate was pinned locally at the first connection to the console-provided endpoint (trust on first use), rather than independently authenticated against a public CA. No credentials were sent during that bootstrap handshake. Subsequent application and verification connections validate the chain and hostname. The private connection config and local trust file are excluded from Git. A configured connection failure does not silently fall back to local storage. Cloud text and vectors are stored remotely; originals currently remain in the app's local `.data/uploads` directory. Model inference stays on the app server. Do not claim a cloud configuration is completely offline or that no data leaves the computer.
 
 ## What works
 
@@ -81,7 +81,7 @@ See:
 - `PRD.md` — requirements and acceptance criteria.
 - `docs/PRD-REVIEW.md` — pre-build self-review.
 - `docs/VERIFICATION.md` — implemented checks, visual review and remaining limitations.
-- `docs/SUBMISSION-DRAFT.md` — factual draft with verified public repository/demo links; live Tiger verification remains pending.
+- `docs/SUBMISSION-DRAFT.md` — factual draft with verified public repository/demo links; live Tiger verification evidence included.
 
 ## Attribution
 
