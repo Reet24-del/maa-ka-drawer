@@ -4,9 +4,9 @@
 
 ## Functional checks
 
-`npm test`: 12/12 passed after fixing source-file serving from the ignored `.data` directory. Tests cover stored/unknown dates, actual Hindi embedding retrieval, unrelated-query refusal, exact and unknown invoice IDs, category filtering, invalid/unconfirmed fields, disguised uploads, save/search/archive/undo, valid original-file serving, SQL-like query input, cross-origin mutation rejection, and close/reopen persistence. No mocked model outputs.
+`npm test`: 21/21 passed after fixing source-file serving from the ignored `.data` directory. Tests cover stored/unknown dates, actual Hindi embedding retrieval, unrelated-query refusal, exact and unknown invoice IDs, category filtering, invalid/unconfirmed fields, disguised uploads, save/search/archive/undo, valid original-file serving, SQL-like query input, cross-origin mutation rejection, and close/reopen persistence. No mocked model outputs.
 
-`npm run build`: Vite production build passes. PDF.js is loaded only when an original attachment is opened. Its worker is a separate asset.
+`npm run build`: Vite production build passes. PDF.js is loaded on demand for attachment preview or PDF extraction. Its worker is a separate asset.
 
 Browser/IAB checks performed through the supported computer-use browser tools:
 
@@ -44,9 +44,9 @@ The implementation was visually compared against the concept and the primary str
 
 - **Tiger Cloud connection verified on October 5, 2026 at 05:45 UTC.** See TIGER-VERIFICATION.json. The live app now reports `tiger-cloud`. The existing retrieval benchmark remains a local PGlite measurement.
 - Mother’s own trial and feedback pending.
-- Public repository and a narrated demo are published at https://github.com/Reet24-del/maa-ka-drawer and its v0.1.0 release. DEV post remains a draft pending final publication.
+- Public repository and a narrated demo are published at https://github.com/Reet24-del/maa-ka-drawer and its v0.1.0 release. The DEV article is published; its editor now exposes Save changes.
 - Local app is single-household and unauthenticated; no public private-data deployment.
-- Automatic OCR is not implemented. Text entry is explicit.
+- English/Hindi OCR is implemented; real-world photo and handwriting accuracy is not established.
 - Broader multilingual retrieval, duplicate/near-duplicate receipt behavior, and production-scale performance remain unverified.
 
 ## Flashcard redesign verification — October 5
@@ -59,7 +59,7 @@ Final automated rerun: 12/12 existing integration tests pass. The first attempt 
 
 ## Public delivery
 
-Repository and v0.1.0 release are public under Reet24-del/maa-ka-drawer. The two-minute MP4 contains real app captures with scene captions and Murf Isha Indian English narration; it is not a continuous screen recording. The complete encoded video was decoded successfully with FFmpeg and an extracted encoded frame was inspected. Actual screenshots were exported through TextEdit into a local JSON file, decoded and inspected with view_image; this resolves the earlier lack of local screenshot export. No model or uploaded household data, credentials, or .env file was included in the repository. The synthetic kettle used for the captures was archived after the demo.
+Repository and v0.1.0 release are public under Reet24-del/maa-ka-drawer. The updated 2-minute-29-second MP4 contains real app captures with scene captions and Murf Isha Indian English narration; it is not a continuous screen recording. The complete encoded video was decoded successfully with FFmpeg and an extracted encoded frame was inspected. Actual screenshots were exported through TextEdit into a local JSON file, decoded and inspected with view_image; this resolves the earlier lack of local screenshot export. No model or uploaded household data, credentials, or .env file was included in the repository. The synthetic kettle used for the captures was archived after the demo.
 
 A guarded `npm run verify:tiger` command is available for the remaining live integration check. Its missing-configuration path was checked: it exits with status 2 without connecting or writing a success report. The live integration subsequently passed and wrote TIGER-VERIFICATION.json. The DEV post was saved as an unpublished draft under the user's Reet Singh account using the official template and all three challenge tags; the UI confirms “Unpublished Post.” AI disclosure is “Fully Autonomous,” matching the drafting process.
 
@@ -68,3 +68,15 @@ A guarded `npm run verify:tiger` command is available for the remaining live int
 A dedicated free Tiger Cloud service passed TLS, pgvector 0.8.6, stored 384-dimensional embeddings, exact identifier search, vector search, reconnect persistence, archive exclusion and undo. The verification record remains archived. The free service uses a private Timescale CA: bootstrap trust was on first use to the console-provided host, with no credentials sent in that handshake; the pinned CA and hostname are checked on all subsequent app connections. This is not independent public-CA authentication. Credentials and CA config remain local and ignored.
 
 Murf Isha (`en-IN-isha`, Conversational, GEN2) provides the English (India) narration. Each scene length follows its generated audio, with a short leading/trailing gap. The first narrated encode decoded fully, contained an AAC track in every scene, and measured -19.8 dB mean / -1.8 dB peak. The revised closing scene distinguishes local captures from separately verified cloud integration.
+
+## Voice entry verification
+
+The first browser speech-service implementation failed with a network error in the in-app browser. It was replaced by MediaRecorder capture, browser PCM decoding, and real Whisper-small q8 inference on the app server. Two Murf-generated Hindi/Indian-English development fixtures produce Electricity bill and ₹400; see VOICE-VERIFICATION.json for exact transcripts and provenance. A narrower Hindi homophone normalization was added based on those examples. They are not held-out accuracy measurements. Audio buffers are bounded to 30 seconds and are not stored as receipt attachments. Silence is rejected without generating text; malformed and non-finite PCM inputs are rejected.
+
+## OCR and voice extension — final checks
+
+21 automated tests pass, including actual Tesseract OCR on a synthetic electricity bill, unknown/multi-item classification, malformed OCR input rejection and conservative voice amount parsing. Production build passes. Dependency audit reports zero vulnerabilities after using Sharp 0.35.4+ consistently with Transformers.js.
+
+Browser: uploaded electricity-demo.png; extracted title Electricity bill, category Services, exact invoice OCR-DEMO-400 and INR 400.00; saved to Tiger Cloud and opened its original image; archived the synthetic record afterward. Uploaded demo-receipt.pdf; extracted Electric kettle and its source text, leaving dates blank for explicit review. A synthetic Hindi voice file produced Electricity bill and ₹400, preserving the actual imperfect transcript. A first voice save failed; final cloud persistence retest is recorded below. No live mother speech or feedback is claimed.
+
+The same previously reviewed synthetic voice-note text was subsequently saved through the browser form, reopened after a reload from Tiger Cloud, and archived. A direct cloud save of a synthetic Hindi voice-derived note also passed. The browser declined a repeat audio upload, so no further audio upload was attempted. The successful earlier transcription capture and separate persistence checks are the evidence; a final live microphone recording remains unverified. Scanned-PDF OCR is implemented but its browser retest was not completed; embedded-text PDF extraction and PNG OCR were verified.

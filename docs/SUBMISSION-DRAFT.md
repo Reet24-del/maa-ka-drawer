@@ -1,6 +1,6 @@
 ---
 title: "Maa ka Drawer: finding my mother’s bills with Tiger Data and open multilingual search"
-published: false
+published: true
 tags: devchallenge, weekendchallenge, hf26challenge
 ---
 
@@ -8,7 +8,7 @@ tags: devchallenge, weekendchallenge, hf26challenge
 
 ## What I Built
 
-A receipt can be saved and still be hard to find. You remember the washing machine, the shop, or what broke—not necessarily the filename or invoice number.
+A receipt can be saved and still be hard to find. You remember the washing machine, the shop, or what broke, not necessarily the filename or invoice number.
 
 I built **Maa ka Drawer** for my mother: a small household receipt finder that combines open multilingual embeddings with Tiger Cloud PostgreSQL keyword and vector search. The goal is to make “find that bill” a smaller job.
 
@@ -18,11 +18,23 @@ The app opens onto a drawer of illustrated cards. Hovering lifts and tilts a car
 
 ![The running Maa ka Drawer app with six fictional household receipts](https://raw.githubusercontent.com/Reet24-del/maa-ka-drawer/main/docs/demo/drawer.jpg)
 
+### Less typing: upload or speak
+
+A JPG, PNG or PDF upload now extracts text and suggests a recognised bill type. A synthetic electricity bill became **Electricity bill → Services**, retaining its INR 400 amount and original image. Tesseract.js reads English/Hindi text on the app server. PDF.js reads embedded text directly; scanned-page OCR is implemented, limited to the first three pages, but its browser retest is still pending. Photos and embedded-text PDFs passed functional checks. Blurred photos, handwriting and unfamiliar bill layouts can fail.
+
+![A receipt image recognised as an Electricity bill](https://raw.githubusercontent.com/Reet24-del/maa-ka-drawer/main/docs/demo/ocr-upload.jpg)
+
+**Speak receipt** records a short Hindi or Indian English note, or accepts an audio file. Local [Whisper-small](https://huggingface.co/openai/whisper-small), via the [ONNX conversion](https://huggingface.co/onnx-community/whisper-small) and Transformers.js, transcribes the audio. A conservative parser suggests the item and explicitly stated amount. A synthetic Hindi development recording produced **Electricity bill · ₹400**; the imperfect transcript remains visible for correction. Voice notes are labelled as notes, not original invoices. The recording is temporary; only reviewed text is saved.
+
+![Local Hindi transcription with an editable transcript and a 400 rupee bill suggestion](https://raw.githubusercontent.com/Reet24-del/maa-ka-drawer/main/docs/demo/voice-entry.jpg)
+
+The [voice verification record](https://github.com/Reet24-del/maa-ka-drawer/blob/main/docs/VOICE-VERIFICATION.json) uses two Murf-generated development fixtures, not a held-out accuracy test or my mother's feedback. Transcription and cloud save/reload were verified separately. Further live-microphone and noisy-household testing remains pending. Murf Isha provides the Indian English demo narration; Murf does not transcribe user notes.
+
 ## Demo
 
-[Watch or download the 2-minute narrated demo video](https://github.com/Reet24-del/maa-ka-drawer/releases/download/v0.1.0/maa-ka-drawer-demo.mp4).
+[Watch or download the narrated demo video](https://github.com/Reet24-del/maa-ka-drawer/releases/download/v0.1.0/maa-ka-drawer-demo.mp4).
 
-The video is a captioned walkthrough with Murf Isha Indian English narration assembled from screenshots captured during real interactions with the app. It shows Hindi search, receipt evidence, a no-match query, saving a PDF-backed receipt, archive, undo, and persistence after reload. It is not a continuous screen recording. Every demonstrated receipt is fictional.
+The video is a captioned walkthrough with Murf Isha Indian English narration assembled from screenshots captured during real interactions with the app. It shows Hindi search, receipt evidence, a no-match query, uploading a receipt photo with OCR, Hindi voice transcription, an attached PDF, archive, undo, and persistence after reload. It is not a continuous screen recording. Every demonstrated receipt is fictional.
 
 [Demo release and setup notes](https://github.com/Reet24-del/maa-ka-drawer/releases/tag/v0.1.0) · [Expanded scene notes](https://github.com/Reet24-del/maa-ka-drawer/blob/main/docs/demo/transcript.md)
 
@@ -42,7 +54,7 @@ PostgreSQL stores source text, metadata, full-text search vectors and pgvector e
 
 The interface uses React and Vite; Express serves the API and built app. PDF.js renders originals inside the receipt view. Codex helped implement and test the project, and generated appliance illustrations provide visual cues. The illustrations are not photographs of my mother's possessions.
 
-**Tiger Data is the live data layer.** A dedicated free Tiger Cloud service stores receipt text and 384-dimensional embeddings in pgvector. A live verification run passed saving, exact invoice retrieval, vector search, reconnect persistence, archive exclusion and undo. The [verification record](https://github.com/Reet24-del/maa-ka-drawer/blob/main/docs/TIGER-VERIFICATION.json) includes the timestamp and pgvector version. The walkthrough images and small retrieval benchmark were captured in local PGlite mode; the cloud integration was verified separately.
+**Tiger Data is the live data layer.** A dedicated free Tiger Cloud service stores receipt text and 384-dimensional embeddings in pgvector. A live verification run passed saving, exact invoice retrieval, vector search, reconnect persistence, archive exclusion and undo. The [verification record](https://github.com/Reet24-del/maa-ka-drawer/blob/main/docs/TIGER-VERIFICATION.json) includes the timestamp and pgvector version. The original gallery/PDF walkthrough and retrieval benchmark used local PGlite. The new OCR and voice-entry captures were taken with the app connected to Tiger Cloud. Cloud persistence was verified separately.
 
 The free service presents a private Timescale certificate authority. I pinned that CA locally on first connection and kept chain and hostname checks enabled for subsequent connections. This initial trust-on-first-use step is disclosed in the README; it is not a publicly authenticated certificate chain.
 
@@ -58,7 +70,7 @@ I ran a fixed evaluation over six fictional receipts and 18 queries:
 
 The [full query set and outcomes](https://github.com/Reet24-del/maa-ka-drawer/blob/main/docs/benchmark.json) are public. This is a small, builder-authored evaluation. A Hindi washing-machine phrase was rejected, and a Hinglish ceiling-fan query returned the purifier. Those failures limit how confidently I can hand this to someone else.
 
-All 12 integration tests pass, covering retrieval, identifiers, validation, source-file serving, archive/undo and database persistence. Desktop and phone layouts were checked in the browser.
+All 21 automated tests pass, covering retrieval, identifiers, validation, source-file serving, archive/undo, database persistence, actual image OCR and conservative voice-note parsing. Desktop and phone layouts were checked in the browser.
 
 ## Why Does Open Innovation Matter?
 
@@ -66,7 +78,7 @@ The open model gives this project a retrieval component I can run, inspect, repl
 
 The model does one limited job: help locate existing evidence. It does not write an answer about warranty coverage. A user can open the saved text and original document and see what the receipt actually says.
 
-That distinction shaped the rest of the app. Receipt text is entered or pasted manually; there is **no automatic OCR**. Dates are confirmed by the user. Archiving is reversible. The prototype is for one household and has no public account system.
+That distinction shaped the rest of the app. Text extracted from a receipt or transcribed from speech stays editable and requires review. Dates are confirmed by the user. Archiving is reversible. The prototype is for one household and has no public account system.
 
 My next step is a real trial with my mother: ask her to find a bill, observe the words she uses, and improve retrieval against those examples. That feedback will matter more than adding another animation.
 

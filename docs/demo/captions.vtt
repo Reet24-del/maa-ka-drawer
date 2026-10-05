@@ -1,37 +1,31 @@
 WEBVTT
 
-1
-00:00:00.350 --> 00:00:12.167
+00:00:00.000 --> 00:00:12.667
 Meet Maa ka Drawer, a household receipt finder built for my mother. These are real captures of the working app, using fictional bills. Choose a card to open its receipt.
 
-2
-00:00:13.017 --> 00:00:26.208
+00:00:12.667 --> 00:00:26.708
 You can search in everyday language. Here, a Hindi phrase for washing machine finds an English receipt. An open multilingual model combines meaning based search with keyword matches.
 
-3
-00:00:27.058 --> 00:00:37.958
+00:00:26.708 --> 00:00:38.458
 Open the matching card to see the saved bill, invoice number, amount, and dates. The app shows the receipt text, so you can check the details yourself.
 
-4
-00:00:38.808 --> 00:00:50.750
+00:00:38.458 --> 00:00:51.250
 When nothing relevant is saved, the app says no clear match. This passport query finds no receipt. Search still has limitations, which are documented with the code.
 
-5
-00:00:51.600 --> 00:01:04.083
-To save a new bill, add a title and paste the receipt text. Attach a PDF or photo, check the details, then save. This version does not extract text automatically.
+00:00:51.250 --> 00:01:07.542
+Upload a receipt photo or PDF. The app extracts the text and suggests a bill type. This electricity bill was recognised automatically. Check the text and dates before saving; the original stays attached.
 
-6
-00:01:04.933 --> 00:01:16.292
+00:01:07.542 --> 00:01:19.750
 The original PDF is now available inside the receipt. You can view it or download it. If the bill does not state a warranty expiry date, that field stays blank.
 
-7
-00:01:17.142 --> 00:01:27.917
+00:01:19.750 --> 00:01:31.375
 Want to tidy the drawer? Archive removes a receipt from the active view while keeping its saved text and original. The Undo button lets you bring it straight back.
 
-8
-00:01:28.767 --> 00:01:42.042
-After Undo, the receipt returns and stays saved when the page reloads. This walkthrough uses the local database. Twelve integration tests cover the main storage and retrieval flows.
+00:01:31.375 --> 00:01:45.292
+After Undo, the receipt returns and stays saved when the page reloads. Twenty one automated tests now cover storage, retrieval, voice parsing and image text recognition.
 
-9
-00:01:42.892 --> 00:02:01.917
-On six fictional bills, hybrid search found twelve of fourteen expected matches. Two language queries failed. Tiger Cloud storage, vector search, and persistence are now verified separately. A trial with my mother is still pending. The code and results are public.
+00:01:45.292 --> 00:02:05.292
+You can also record a short voice note. Here, synthetic Hindi test audio is transcribed by the open Whisper model and becomes Electricity bill, four hundred rupees. Review the words, then use the details. Audio is temporary; only the reviewed note is saved.
+
+00:02:05.292 --> 00:02:28.667
+On six fictional bills, hybrid search found twelve of fourteen expected matches. Two language queries failed. Tiger Cloud storage and vector search are verified. Older gallery captures used local storage; the new input captures use Tiger Cloud. A trial with my mother is still pending. The code and results are public.

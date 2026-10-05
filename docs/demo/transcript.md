@@ -18,9 +18,9 @@ Open the matching card to see the saved bill, invoice number, amount, and dates.
 
 When nothing relevant is saved, the app says no clear match. This passport query finds no receipt. Search still has limitations, which are documented with the code.
 
-## 05. Save it once.
+## 05. Upload. Review. Save.
 
-To save a new bill, add a title and paste the receipt text. Attach a PDF or photo, check the details, then save. This version does not extract text automatically.
+Upload a receipt photo or PDF. The app extracts the text and suggests a bill type. This electricity bill was recognised automatically. Check the text and dates before saving; the original stays attached.
 
 ## 06. The original, right there.
 
@@ -32,8 +32,12 @@ Want to tidy the drawer? Archive removes a receipt from the active view while ke
 
 ## 08. Still here after a reload.
 
-After Undo, the receipt returns and stays saved when the page reloads. This walkthrough uses the local database. Twelve integration tests cover the main storage and retrieval flows.
+After Undo, the receipt returns and stays saved when the page reloads. Twenty one automated tests now cover storage, retrieval, voice parsing and image text recognition.
 
-## 09. Open AI. Honest limits.
+## 09. Say it in your own words.
 
-On six fictional bills, hybrid search found twelve of fourteen expected matches. Two language queries failed. Tiger Cloud storage, vector search, and persistence are now verified separately. A trial with my mother is still pending. The code and results are public.
+You can also record a short voice note. Here, synthetic Hindi test audio is transcribed by the open Whisper model and becomes Electricity bill, four hundred rupees. Review the words, then use the details. Audio is temporary; only the reviewed note is saved.
+
+## 10. Open AI. Honest limits.
+
+On six fictional bills, hybrid search found twelve of fourteen expected matches. Two language queries failed. Tiger Cloud storage and vector search are verified. Older gallery captures used local storage; the new input captures use Tiger Cloud. A trial with my mother is still pending. The code and results are public.

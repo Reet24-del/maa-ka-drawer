@@ -6,7 +6,7 @@ Find household bills in everyday language and keep the original document beside 
 
 ## Demo and code
 
-[2-minute narrated demo](https://github.com/Reet24-del/maa-ka-drawer/releases/download/v0.1.0/maa-ka-drawer-demo.mp4) · [Release notes](https://github.com/Reet24-del/maa-ka-drawer/releases/tag/v0.1.0) · [Demo scene notes](docs/demo/transcript.md)
+[Narrated demo](https://github.com/Reet24-del/maa-ka-drawer/releases/download/v0.1.0/maa-ka-drawer-demo.mp4) · [Release notes](https://github.com/Reet24-del/maa-ka-drawer/releases/tag/v0.1.0) · [Demo scene notes](docs/demo/transcript.md)
 
 The video is narrated by Murf Isha in Indian English and assembled from real browser captures, not a continuous screen recording. It uses only synthetic receipts.
 
@@ -45,14 +45,16 @@ TLS certificate verification is enabled for remote databases. `DATABASE_SSL_CA` 
 ## What works
 
 - Browse illustrated 3D receipt cards; mouse hover lifts and tilts them, keyboard and touch open the receipt dialog.
-- Add reviewed receipt text, optional merchant/category/dates, and a JPG/PNG/PDF original.
+- Upload JPG/PNG/PDF receipts: extract text and suggest a bill title/category, then review and save.
+- Dictate a short Hindi/Indian English voice note; review its transcript and stated amount.
+- Add reviewed receipt text, optional merchant/category/dates, and preserve the original.
 - Search in everyday language using an open multilingual embedding model, exact words and hybrid ranking.
 - Read the original PDF inside the app, page by page, or view an original image. Download sources.
 - Keep missing warranty dates blank. No inferred dates, no free-form generated answer.
 - Archive a record and undo the action without deleting it.
 - Six explicitly fictional sample receipts for a reproducible demo.
 
-Text is entered manually. This version **does not perform OCR**. Mother-specific feedback is pending; no use or satisfaction claim has been made on her behalf.
+Text can be typed, pasted, or dictated. **Speak receipt** records up to 30 seconds, or accepts a short audio file. An open Whisper-small model transcribes Hindi or Indian English locally on the app server. A conservative parser suggests a bill title/category and an amount, while preserving the words for review. Audio is temporary and is not stored in Tiger Cloud or as an original invoice. First voice use downloads the additional model. Upload a JPG, PNG or PDF to extract English/Hindi text and suggest a recognised bill type. Tesseract.js runs OCR on the app server; PDF.js extracts embedded PDF text or renders scanned pages for OCR. It reads at most the first three PDF pages and retains the complete original. Handwriting, blurred photos and unusual layouts can fail; check the editable text before saving. Dates and payment status are never inferred. Mother-specific feedback is pending; no use or satisfaction claim has been made on her behalf.
 
 ## How search works
 
@@ -89,6 +91,16 @@ See:
 - [Transformers.js](https://github.com/huggingface/transformers), Apache-2.0.
 - [pgvector](https://github.com/pgvector/pgvector), PostgreSQL License; [PGlite](https://github.com/electric-sql/pglite), Apache-2.0.
 - [Tiger Data hybrid search documentation](https://www.tigerdata.com/docs/learn/tutorials/hybrid-search) informed the hybrid retrieval approach.
-- React, Vite, Express, Lucide icons, PDF.js, node-postgres and Zod; see their package licenses.
+- React, Vite, Express, Lucide icons, PDF.js, Tesseract.js, Sharp, node-postgres and Zod; see their package licenses.
 
 Built with AI assistance. Sample receipt text is synthetic. The generated design concept is an implementation reference; the application UI and receipt text are native code.
+
+## Voice entry verification
+
+`npm run verify:voice` runs real Whisper-small inference on two synthetic development audio fixtures and checks that each produces an Electricity bill draft for ₹400. [Results](docs/VOICE-VERIFICATION.json). These are development examples, not a representative speech-recognition benchmark. A Hindi homophone normalization was added using the fixtures. Initial browser speech-service recognition failed in the in-app browser, so the final implementation records audio and uses local Whisper instead. Always check the transcript and amount before saving. The amount is a stated bill amount, not evidence of payment.
+
+Whisper source: [openai/whisper-small](https://huggingface.co/openai/whisper-small), with [ONNX Community conversion](https://huggingface.co/onnx-community/whisper-small). Murf generated the synthetic test audio and the demo narration; it does not receive user voice notes for transcription.
+
+## OCR verification
+
+`npm test` includes real Tesseract recognition of a clearly labelled fictional electricity bill image, checking its title, invoice identifier and INR 400 amount. Browser checks cover photo upload, embedded PDF text extraction and source preservation. This is functional verification on development fixtures, not a benchmark of phone photos or handwriting. English and Hindi OCR weights download on first use; receipt images are processed on the app server. Classification uses a small explicit set of bill/appliance patterns, so unknown or multi-item receipts require a manual title.

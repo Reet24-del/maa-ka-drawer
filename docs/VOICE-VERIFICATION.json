@@ -1,0 +1,30 @@
+{
+  "verifiedAt": "2026-10-05T06:05:11.409Z",
+  "results": [
+    {
+      "language": "hi-IN",
+      "voice": "Murf Shweta",
+      "prompt": "बिजली का बिल चार सौ रुपये आया है।",
+      "audio": "Synthetic speech, mono 16 kHz float32 PCM",
+      "sha256": "f3a859d748ecb8a5089ed1c034ce3a223ffa8e668fd2c89813360df070b2fd82",
+      "transcript": "बिजली का बिल चार सो रुपी आया है",
+      "title": "Electricity bill",
+      "amount": 400,
+      "model": "onnx-community/whisper-small",
+      "elapsedMs": 3553
+    },
+    {
+      "language": "en-IN",
+      "voice": "Murf Isha",
+      "prompt": "The electricity bill is four hundred rupees.",
+      "audio": "Synthetic speech, mono 16 kHz float32 PCM",
+      "sha256": "ed20fadf38a579fc1a6c460af18f3e3484f5d18a75df51cbeba86418f7814832",
+      "transcript": "The electricity bill is 400 rupees.",
+      "title": "Electricity bill",
+      "amount": 400,
+      "model": "onnx-community/whisper-small",
+      "elapsedMs": 2076
+    }
+  ],
+  "note": "Two synthetic development fixtures, not a general accuracy benchmark. Hindi parser normalization was adjusted using these fixtures. No mother feedback or recording is included."
+}

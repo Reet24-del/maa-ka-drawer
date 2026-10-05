@@ -48,7 +48,7 @@ Data model: documents (UUID, title, category, merchant, source text, optional pr
 
 ## Scope boundaries
 
-No automatic OCR in the required path: paste or type reviewed receipt text, optionally attach the original. Do not imply photographs are automatically read. No financial transactions, medical advice, warranty interpretation, voice assistant, reminders, accounts, or arbitrary web retrieval. Photo OCR, public multi-user hosting and family sharing can follow after a verified core.
+Original scope: reviewed manual entry with optional originals. The accepted additions below extend this to voice and OCR. No financial transactions, medical advice, warranty interpretation, reminders, accounts, arbitrary web retrieval, public multi-user hosting or family sharing.
 
 ## Experience
 
@@ -71,3 +71,11 @@ Sources: https://dev.to/challenges/hacktoberfest-weekend-2026-10-01 ; https://de
 ## Approved visual revision — 3D flashcards
 
 The user requested the landing page show multiple appliance-image flashcards with cursor-driven enlargement and 3D depth. This supersedes the original receipt list/detail split: use a responsive card gallery, hover lift/tilt, keyboard focus treatment, touch tap, and a receipt-detail modal. Keep source evidence, search, add, filters, archive and undo. Respect reduced motion. Illustrations are generic item imagery; never imply they are the user's actual purchased product.
+
+## Accepted addition: voice entry (October 5)
+
+User requested spoken receipt capture, such as “bijli bill 400 ka aaya hai.” Add a microphone recorder and audio-file alternative in the existing Add receipt form. Transcribe Hindi/Indian English using an open model on the local app server. Suggest an editable title/category and explicitly stated amount. Keep the original transcript, do not infer invoice number, payment status or dates, and require review before saving. Limit recordings to 30 seconds. Audio is temporarily playable and discarded when the form closes; only reviewed receipt text is persisted.
+
+## Accepted addition: receipt OCR (October 5)
+
+Upload a JPG, PNG or PDF (6 MB maximum) and extract English/Hindi text. Suggest a recognised bill or appliance title/category without overwriting existing typed text. Use embedded PDF text where available and OCR for scanned pages, limited to three pages. Keep the complete original attached. Require review, preserve unknown dates, and keep a manual path if extraction fails. Recognise a synthetic electricity bill and a kettle PDF in the browser; verify the saved original remains available.

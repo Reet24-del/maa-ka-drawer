@@ -6,6 +6,8 @@ import { receiptSchema, searchSchema, validateAttachment } from './validation.js
 import { DATA_DIR } from './config.js';
 import { modelState } from './embeddings.js';
 import { SEMANTIC_MIN } from './repository.js';
+import { decodePcm, transcribe, transcriptionState } from './transcription.js';
+import { readReceiptImage } from './ocr.js';
 
 export function createApp(state) {
   const app = express();
@@ -23,7 +25,7 @@ export function createApp(state) {
   });
   app.use(express.json({limit:'9mb'}));
   app.get('/api/health', (req,res) => res.json({
-    status:state.status, database:state.kind, model:modelState,
+    status:state.status, database:state.kind, model:modelState, transcription:transcriptionState,
     search:{method:'PostgreSQL full-text + pgvector cosine + reciprocal rank fusion',semanticMinimum:SEMANTIC_MIN},
     error:state.status==='error' ? 'Startup failed. Check the server log and database/model access.' : undefined,
   }));
@@ -31,6 +33,17 @@ export function createApp(state) {
   app.get('/api/receipts', async (req,res) => {
     const params=searchSchema.parse({q:'',category:req.query.category});
     res.json({receipts:await state.repo.list(params.category)});
+  });
+  app.post('/api/transcribe', async (req,res) => {
+    if(!req.body||!['hi-IN','en-IN'].includes(req.body.language)||req.body.sampleRate!==16000)return res.status(400).json({error:'Use Hindi or Indian English with 16 kHz audio.'});
+    let samples;try{samples=decodePcm(req.body.audio);}catch{return res.status(400).json({error:'Invalid voice recording. Record up to 30 seconds and try again.'});}
+    try{res.json(await transcribe(samples,req.body.language));}catch(error){res.status(error.status||503).json({error:error.status===429?error.message:'Local transcription could not finish. Try again, or type your note. The first use downloads the open speech model.'});}
+  });
+  app.post('/api/ocr', async (req,res) => {
+    const file=req.body?.attachment;
+    if(!file||!['image/png','image/jpeg'].includes(file.type)||typeof file.data!=='string')return res.status(400).json({error:'Choose a PNG or JPG image for OCR.'});
+    let bytes;try{bytes=validateAttachment(file);}catch{return res.status(400).json({error:'Invalid receipt image. Choose a JPG or PNG up to 6 MB.'});}
+    try{res.json(await readReceiptImage(bytes));}catch(error){res.status(error.status||422).json({error:error.status===429?error.message:'Could not read this image. Try a clearer photo, or enter the text yourself.'});}
   });
   app.get('/api/search', async (req,res) => {
     const p=searchSchema.parse(req.query);

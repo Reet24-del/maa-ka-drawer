@@ -19,6 +19,21 @@ const base=`http://127.0.0.1:${server.address().port}`;
 const api=async(route,options={})=>fetch(base+route,{...options,headers:{'Content-Type':'application/json',...options.headers}});
 let added;
 
+test('OCR API rejects non-image and disguised upload bodies',async()=>{
+  for(const body of [null,{attachment:{type:'application/pdf',data:'JVBERi0='}},{attachment:{type:'image/png',data:Buffer.from('<html>not an image</html>').toString('base64')}}]) {
+    assert.equal((await api('/api/ocr',{method:'POST',body:JSON.stringify(body)})).status,400);
+  }
+});
+
+test('voice API rejects malformed audio and does not hallucinate from silence',async()=>{
+ for(const body of [{language:'hi-IN',sampleRate:8000,audio:'abcd'},{language:'hi-IN',sampleRate:16000,audio:'not-base64!'}]){
+  assert.equal((await api('/api/transcribe',{method:'POST',body:JSON.stringify(body)})).status,400);
+ }
+ const silence=new Float32Array(16000);
+ const response=await api('/api/transcribe',{method:'POST',body:JSON.stringify({language:'hi-IN',sampleRate:16000,audio:Buffer.from(silence.buffer).toString('base64')})});
+ assert.equal(response.status,200);assert.equal((await response.json()).text,'');
+});
+
 test('seeded sample dates are exactly stored, unknown warranty stays null',async()=>{
  assert.equal((await repo.list()).length,6);
  assert.equal((await repo.detail(samples[3].id)).warrantyEndDate,null);
