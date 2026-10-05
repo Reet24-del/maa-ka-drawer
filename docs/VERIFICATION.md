@@ -44,7 +44,7 @@ The implementation was visually compared against the concept and the primary str
 
 - **Tiger Cloud connection not verified.** Code supports a real PostgreSQL connection and pgvector, but the current tested backend is local PGlite. Account sign-in is pending. Do not claim live Tiger Data usage or cloud benchmark results yet.
 - Mother’s own trial and feedback pending.
-- Public repository and demo recording/deployment not published by this task. Submission draft remains unpublished and marks missing links.
+- Public repository and a 93-second captioned demo are published at https://github.com/Reet24-del/maa-ka-drawer and its v0.1.0 release. DEV post remains a draft while Tiger Cloud verification is pending.
 - Local app is single-household and unauthenticated; no public private-data deployment.
 - Automatic OCR is not implemented. Text entry is explicit.
 - Broader multilingual retrieval, duplicate/near-duplicate receipt behavior, and production-scale performance remain unverified.
@@ -56,3 +56,7 @@ Production build passes. Tested in the live IAB at 1280px desktop and 390×844 p
 Final visual pass also used a 1464×1074 viewport (the concept's native dimensions), with the full gallery captured below the fold. Above-fold product copy remains unchanged; differences from generated concept copy and square artwork framing are intentional and logged in DESIGN.md. The browser render was compared for typography, palette, image subjects, shadows/rotation, spacing and control hierarchy. No observed clipping or unintended overlap remains.
 
 Final automated rerun: 12/12 existing integration tests pass. The first attempt was blocked from binding a local port by the sandbox; after network permission was granted, the same test command completed successfully. Browser console inspection reported no errors.
+
+## Public delivery
+
+Repository and v0.1.0 release are public under Reet24-del/maa-ka-drawer. The 93-second silent MP4 contains real app captures with scene captions; it is not a continuous screen recording. The complete encoded video was decoded successfully with FFmpeg and an extracted encoded frame was inspected. Actual screenshots were exported through TextEdit into a local JSON file, decoded and inspected with view_image; this resolves the earlier lack of local screenshot export. No model or uploaded household data, credentials, or .env file was included in the repository. The synthetic kettle used for the captures was archived after the demo.

@@ -1,65 +1,69 @@
 ---
-title: "Maa ka Drawer: finding my mother’s household receipts with open AI and hybrid search"
+title: "Maa ka Drawer: finding my mother’s household bills with open multilingual search"
 published: false
 tags: devchallenge, weekendchallenge, hf26challenge
 ---
-
-**Draft — not ready to publish. Add the real demo and repository links, verify a live Tiger Data connection, and update only the claims that verification supports.**
 
 *This is a submission for the [Hacktoberfest Weekend Challenge: Build for a Friend](https://dev.to/challenges/hacktoberfest-weekend-2026-10-01).*
 
 ## What I Built
 
-I built Maa ka Drawer for my mother around one small task: finding the right household bill when it is needed. I chose this problem for the prototype; I have not yet tested it with her, so this is not a story about feedback she has already given me.
+A receipt can be saved and still be hard to find. You remember the washing machine, the shop, or what broke—not necessarily the filename or invoice number.
 
-The app saves reviewed receipt text and an optional original photo or PDF. Ask for a receipt in everyday language, select a result, and read the evidence beside it. If a warranty date is missing, it stays missing. There is no chatbot making up an answer.
+I built **Maa ka Drawer** for my mother: a small household receipt finder that combines open multilingual embeddings with PostgreSQL keyword and vector search. The goal is to make “find that bill” a smaller job.
 
-The six receipts in the demo are fictional. This version requires pasted or typed receipt text; it does not automatically read a photograph.
+I chose the problem for this prototype. I have not yet tested it with her, so I cannot claim that it has saved her time or quote feedback she has not given.
+
+The app opens onto a drawer of illustrated cards. Hovering lifts and tilts a card; tapping or clicking opens the receipt. Search works over the saved text, and an original PDF or photo can stay attached. If the receipt does not state a warranty expiry, that field stays blank.
+
+![The running Maa ka Drawer app with six fictional household receipts](https://raw.githubusercontent.com/Reet24-del/maa-ka-drawer/main/docs/demo/drawer.jpg)
 
 ## Demo
 
-Add a real deployed link or recorded demonstration before publishing. Suggested sequence: show the sample notice, search `कपड़े धोने वाली मशीन`, open the washing-machine evidence, try an unrelated passport query, and save a synthetic receipt with an original PDF. Demonstrate archive and undo.
+[Watch or download the 93-second demo video](https://github.com/Reet24-del/maa-ka-drawer/releases/download/v0.1.0/maa-ka-drawer-demo.mp4).
+
+The video is a silent, captioned walkthrough assembled from screenshots captured during real interactions with the app. It shows Hindi search, receipt evidence, a no-match query, saving a PDF-backed receipt, archive, undo, and persistence after reload. It is not a continuous screen recording. Every demonstrated receipt is fictional.
+
+[Demo release and setup notes](https://github.com/Reet24-del/maa-ka-drawer/releases/tag/v0.1.0) · [Expanded scene notes](https://github.com/Reet24-del/maa-ka-drawer/blob/main/docs/demo/transcript.md)
 
 ## Code
 
-Add the public repository URL before publishing. Source is currently saved locally in this project.
+{% github Reet24-del/maa-ka-drawer %}
+
+The repository includes the app, MIT license, PRD, schema, tests, evaluation queries and results. Run it locally with Node.js 22+, `npm ci`, `npm run build`, and `npm start`.
 
 ## How I Built It
 
-The AI component is multilingual-e5-small, an open multilingual embedding model. I run its quantized ONNX weights locally through Transformers.js. Query and passage prefixes, mean pooling, normalization and 384-dimensional vectors follow the model's retrieval interface.
+The useful AI task here is retrieval. A Hindi query such as `कपड़े धोने वाली मशीन` can find an English washing-machine receipt even when the exact query words are absent.
 
-PostgreSQL holds both source text and vectors. Keyword search handles exact words and invoice identifiers. pgvector handles semantic similarity. Reciprocal rank fusion combines the candidate rankings, while a conservative similarity gate rejects some weak matches. The original document stays visible because retrieval should help someone find their evidence, not replace it.
+The model is [multilingual-e5-small](https://huggingface.co/intfloat/multilingual-e5-small), using [Xenova's ONNX conversion](https://huggingface.co/Xenova/multilingual-e5-small) through Transformers.js. Quantized inference runs on the app server. Queries and receipt chunks become normalized, 384-dimensional vectors.
 
-**Tiger integration status:** the PostgreSQL adapter is ready for Tiger Cloud, but the currently measured implementation uses local PGlite/pgvector. Replace this paragraph with the exact verified Tiger Data setup only after connecting and testing it. Do not describe PGlite as Tiger Cloud.
+PostgreSQL stores source text, metadata, full-text search vectors and pgvector embeddings. Exact words and invoice identifiers matter, so keyword search remains part of the system. Reciprocal rank fusion combines keyword and semantic rankings. A similarity gate filters weak or ambiguous semantic matches. These scores are not probabilities.
 
-### What the first test showed
+The interface uses React and Vite; Express serves the API and built app. PDF.js renders originals inside the receipt view. Codex helped implement and test the project, and generated appliance illustrations provide visual cues. The illustrations are not photographs of my mother's possessions.
 
-On six synthetic receipts and 18 prewritten evaluation queries:
+**Tiger Data integration status:** Tiger Data was the selected partner technology and its hybrid-search documentation informed this implementation. The remote PostgreSQL adapter is implemented, but the live Tiger Cloud connection is still awaiting account access. The demonstrated and benchmarked backend is local PGlite with pgvector. I am not claiming verified Tiger Cloud usage yet.
 
-| Mode | Correct first result, positive queries | Correct no-match responses |
+### What worked—and what did not
+
+I ran a fixed evaluation over six fictional receipts and 18 queries:
+
+| Search mode | Correct first result on 14 positive queries | Correct no-match responses on 4 negative queries |
 |---|---:|---:|
 | Keyword | 8/14 | 4/4 |
 | Vector | 11/14 | 4/4 |
 | Hybrid | 12/14 | 4/4 |
 
-The whole query set and outcomes are in `docs/benchmark.json`. This is a small builder-authored test, not proof of general accuracy. One Hindi phrase for a washing-machine bill was rejected; a Hinglish ceiling-fan query incorrectly returned a purifier receipt. Those failures matter, especially for the person I intend this to help.
+The [full query set and outcomes](https://github.com/Reet24-del/maa-ka-drawer/blob/main/docs/benchmark.json) are public. This is a small, builder-authored evaluation. A Hindi washing-machine phrase was rejected, and a Hinglish ceiling-fan query returned the purifier. Those failures limit how confidently I can hand this to someone else.
 
-During development, an unrelated passport query also exposed why a raw similarity threshold was not enough. Adding a gap check improved refusal on the development examples. The separate evaluation set above was then run with that gate fixed.
+All 12 integration tests pass, covering retrieval, identifiers, validation, source-file serving, archive/undo and database persistence. Desktop and phone layouts were checked in the browser.
 
 ## Why Does Open Innovation Matter?
 
-An open embedding model makes the retrieval stage inspectable and replaceable. Once downloaded, the model can run on the app server without sending each question to a closed model API. In local mode, the records and inference stay on the laptop. With Tiger Cloud configured, receipt text and vectors would be stored in that database, so I would not call that setup fully offline.
+The open model gives this project a retrieval component I can run, inspect, replace and test without a hosted generative API. After the weights are downloaded, local mode keeps receipt data and inference on the laptop. A Tiger Cloud configuration would store receipt text and embeddings remotely; I would not describe that as fully offline.
 
-The system does not generate dates or warranty terms. It retrieves saved text and shows the original file. That keeps the useful AI task small enough to test directly.
+The model does one limited job: help locate existing evidence. It does not write an answer about warranty coverage. A user can open the saved text and original document and see what the receipt actually says.
 
-## My Agent Session
+That distinction shaped the rest of the app. Receipt text is entered or pasted manually; there is **no automatic OCR**. Dates are confirmed by the user. Archiving is reversible. The prototype is for one household and has no public account system.
 
-Optional. Add a reviewed session link only if one is actually published. Do not expose credentials or family records.
-
-## Prize Categories
-
-Intended primary category: **Best Use of Tiger Data**. This is a pending claim until the actual chosen Tiger Data setup is verified and described above.
-
-## What remains
-
-A real test with my mother, broader Hindi/Hinglish coverage, and a better distinction between generic receipt words and item-specific intent. No family feedback is claimed yet.
+My next step is a real trial with my mother: ask her to find a bill, observe the words she uses, and improve retrieval against those examples. That feedback will matter more than adding another animation.

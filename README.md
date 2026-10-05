@@ -4,6 +4,14 @@ Find household bills in everyday language and keep the original document beside 
 
 **Current status:** working local prototype. Actual open multilingual embeddings and PostgreSQL/pgvector queries are tested. The Tiger Cloud adapter is implemented, but a live Tiger Cloud connection is **not yet verified**. The local development database is PGlite; it must not be described as a Tiger Cloud service.
 
+## Demo and code
+
+[93-second captioned demo](https://github.com/Reet24-del/maa-ka-drawer/releases/download/v0.1.0/maa-ka-drawer-demo.mp4) · [Release notes](https://github.com/Reet24-del/maa-ka-drawer/releases/tag/v0.1.0) · [Demo scene notes](docs/demo/transcript.md)
+
+The silent video is assembled from real browser captures, not a continuous screen recording. It uses only synthetic receipts.
+
+![Maa ka Drawer receipt gallery](docs/demo/drawer.jpg)
+
 ## Run
 
 Requires Node.js 22 or newer with `--env-file-if-exists` support.
@@ -36,6 +44,7 @@ TLS certificate verification is enabled for remote databases. A configured conne
 
 ## What works
 
+- Browse illustrated 3D receipt cards; mouse hover lifts and tilts them, keyboard and touch open the receipt dialog.
 - Add reviewed receipt text, optional merchant/category/dates, and a JPG/PNG/PDF original.
 - Search in everyday language using an open multilingual embedding model, exact words and hybrid ranking.
 - Read the original PDF inside the app, page by page, or view an original image. Download sources.
@@ -72,7 +81,7 @@ See:
 - `PRD.md` — requirements and acceptance criteria.
 - `docs/PRD-REVIEW.md` — pre-build self-review.
 - `docs/VERIFICATION.md` — implemented checks, visual review and remaining limitations.
-- `docs/SUBMISSION-DRAFT.md` — factual draft requiring real repository/demo links and live Tiger verification before publishing.
+- `docs/SUBMISSION-DRAFT.md` — factual draft with verified public repository/demo links; live Tiger verification remains pending.
 
 ## Attribution
 
