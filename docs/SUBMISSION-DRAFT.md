@@ -28,7 +28,7 @@ The video is a silent, captioned walkthrough assembled from screenshots captured
 
 ## Code
 
-{% github Reet24-del/maa-ka-drawer %}
+[Browse the complete source on GitHub](https://github.com/Reet24-del/maa-ka-drawer).
 
 The repository includes the app, MIT license, PRD, schema, tests, evaluation queries and results. Run it locally with Node.js 22+, `npm ci`, `npm run build`, and `npm start`.
 

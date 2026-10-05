@@ -38,7 +38,7 @@ Open http://127.0.0.1:4318. The server binds to 127.0.0.1 by default. This is a 
 2. Copy `.env.example` to `.env` and set `DATABASE_URL` locally to the service's PostgreSQL connection string. Keep it out of chat, screenshots and version control.
 3. Restart the API. It creates dedicated `documents`, `chunks`, and `app_meta` tables and enables `vector` if permitted. Use a dedicated development database/schema; the current table names are unqualified.
 4. Inspect `/api/health`: it should report `tiger-cloud`, an actual model state, and the search method. A custom Tiger hostname may appear as `postgresql`; inspect the connection destination privately rather than relabelling another provider.
-5. Save a synthetic receipt, search it, restart, retrieve it again, and record that evidence before claiming the Tiger Data integration.
+5. Run `npm run verify:tiger` against that dedicated service. It checks the Tiger hostname, TLS, pgvector, real stored 384-dimensional embeddings, exact and vector retrieval, reconnect persistence, archive and undo. It leaves only its own synthetic proof record archived and writes `docs/TIGER-VERIFICATION.json` only after every check succeeds. Do not claim Tiger Data integration before this succeeds.
 
 TLS certificate verification is enabled for remote databases. A configured connection failure does not silently fall back to local storage. Cloud text and vectors are stored remotely; originals currently remain in the app's local `.data/uploads` directory. Model inference stays on the app server. Do not claim a cloud configuration is completely offline or that no data leaves the computer.
 
